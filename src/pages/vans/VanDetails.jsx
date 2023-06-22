@@ -9,8 +9,9 @@ export default function VanDetails() {
     React.useEffect(() => {
         fetch(`/api/vans/${params.id}`)
         .then(res => res.json())
-        .then(data => console.log(data))
+        .then(data => setVan(data.vans))
     }, [params.id])
+
     return (
         <div className="van-detail-container">
             {van ? (
