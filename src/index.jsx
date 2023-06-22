@@ -29,6 +29,22 @@ function App() {
   )
 }
 
+/**
+ * It's possible to add more params to the path
+ *
+ * Example:
+ * <Route path='/vans/:id:/:type' element={<VanDetails />}/>
+ * add the van.type for the id in browser:
+ *
+ * On VanDetails.jsx:
+ * const params = useParams()
+ * console.log(params)
+ *
+ *  In Browser:
+ * "localhost:5175/vans/2/rugged"
+ *
+ * log response: {id: "2", type: "rugged"}
+ */
 ReactDOM
 .createRoot(document.getElementById('root'))
 .render(<App />);
