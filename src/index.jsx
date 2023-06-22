@@ -9,6 +9,9 @@ import Vans from './pages/vans/Vans'
 import VanDetails from './pages/vans/VanDetails'
 
 import "./server"
+import Dashboard from './pages/host/Dashboard'
+import Income from './pages/host/Income'
+import Reviews from './pages/host/Reviews'
 
 function App() {
   return (
@@ -19,28 +22,18 @@ function App() {
           <Route path='/about' element={<About />}/>
           <Route path='/vans' element={<Vans />}/>
           <Route path='/vans/:id' element={<VanDetails />}/>
+
+          <Route path='/host' element={<Dashboard />}>
+            <Route path='/host/income' element={<Income />}/>
+            <Route path='/host/reviews' element={<Reviews />}/>
+          </Route>
+
         </Route>
       </Routes>
     </BrowserRouter>
   )
 }
 
-/**
- * It's possible to add more params to the path
- *
- * Example:
- * <Route path='/vans/:id:/:type' element={<VanDetails />}/>
- * add the van.type for the id in browser:
- *
- * On VanDetails.jsx:
- * const params = useParams()
- * console.log(params)
- *
- *  In Browser:
- * "localhost:5175/vans/2/rugged"
- *
- * log response: {id: "2", type: "rugged"}
- */
 ReactDOM
 .createRoot(document.getElementById('root'))
 .render(<App />);
