@@ -30,18 +30,41 @@ export default function Vans() {
             </Link>
         </div>
     ))
+    // vanilla JS function to enable more key/value pairs
+    // it only works with the Links
+    function genNewSearchParamString(key, value) {
+        const searchP = new URLSearchParams(searchParams)
+        if (value === null) {
+            searchP.delete(key)
+        } else {
+            searchP.set(key, value)
+        }
+        console.log(searchP.toString())
+    }
     return (
         <div className="van-list-container">
             <h1>Explore our van options</h1>
             <div className='van-list-filter-buttons'>
-                <button onClick={() => setSearchParams({ type: 'simple' })}>simple</button>
-                <button onClick={() => setSearchParams({ type: 'luxury' })}>luxury</button>
-                <button onClick={() => setSearchParams({ type: 'rugged' })}>rugged</button>
-                <button onClick={() => setSearchParams({})}>Clear</button>
-                <Link to='?type=simple' className='van-type simple'>Simple</Link>
-                <Link to='?type=rugged' className='van-type rugged'>rugged</Link>
-                <Link to='?type=luxury' className='van-type luxury'>luxury</Link>
-                <Link to='.' className='van-type clear-filters'>Clear</Link>
+                <button onClick={genNewSearchParamString('type', 'simple')}>simple</button>
+                <button onClick={genNewSearchParamString('type', 'luxury')}>luxury</button>
+                <button onClick={genNewSearchParamString('type', 'rugged')}>rugged</button>
+                <button onClick={genNewSearchParamString('type', null)}>Clear</button>
+                <Link
+                    to={genNewSearchParamString('type', 'simple')}
+                    className='van-type simple'
+                >Simple</Link>
+                <Link
+                    to={genNewSearchParamString('type', 'rugged')}
+                    className='van-type rugged'
+                >rugged</Link>
+                <Link
+                    to={genNewSearchParamString('type', 'luxury')}
+                    className='van-type luxury'>
+                    luxury</Link>
+                <Link
+                    to={genNewSearchParamString('type', null)}
+                    className='van-type clear-filters'
+                >Clear</Link>
             </div>
             <div className="van-list">
                 {vanElements}
