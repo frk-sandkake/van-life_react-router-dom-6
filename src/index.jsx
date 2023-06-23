@@ -2,22 +2,23 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import LayoutMain from './components/LayoutMain'
 import Home from './pages/Home'
 import About from './pages/About'
 import Vans from './pages/vans/Vans'
 import VanDetails from './pages/vans/VanDetails'
-
-import "./server"
+import NotFound from './pages/NotFound'
 import Dashboard from './pages/host/Dashboard'
 import Income from './pages/host/Income'
 import Reviews from './pages/host/Reviews'
-import LayoutHost from './components/LayoutHost'
 import VansHost from './pages/host/VansHost'
 import VanDetailsHost from './pages/host/VanDetailsHost'
 import VanInfoHost from './pages/host/VanInfoHost'
 import VanPricingHost from './pages/host/VanPricingHost'
 import VanPhotosHost from './pages/host/VanPhotosHost'
+import LayoutMain from './components/LayoutMain'
+import LayoutHost from './components/LayoutHost'
+
+import "./server"
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
             </Route>
           </Route>
 
+          <Route path='*' element={<NotFound />} />
         </Route>
       </Routes>
     </BrowserRouter>
