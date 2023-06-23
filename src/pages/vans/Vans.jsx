@@ -20,7 +20,10 @@ export default function Vans() {
 
     const vanElements = displayedVans.map(van => (
         <div key={van.id} className="van-tile">
-            <Link to={`/vans/${van.id}`}>
+            <Link to={van.id} state={{
+                search: `?${searchParams.toString()}`,
+                type: typeFilter
+                }}>
                 <img src={van.imageUrl} alt={van.name} />
                 <div className="van-info">
                     <h3>{van.name}</h3>
@@ -30,41 +33,39 @@ export default function Vans() {
             </Link>
         </div>
     ))
-    // vanilla JS function to enable more key/value pairs
-    // it only works with the Links
-    function genNewSearchParamString(key, value) {
-        const searchP = new URLSearchParams(searchParams)
-        if (value === null) {
-            searchP.delete(key)
-        } else {
-            searchP.set(key, value)
-        }
-        console.log(searchP.toString())
+
+    function handleFilterChange(key, value) {
+        setSearchParams(prevParams => {
+            if (value === null) {
+                prevParams.delete(key)
+            } else {
+                prevParams.set(key, value)
+            }
+            return prevParams
+        })
     }
+
     return (
         <div className="van-list-container">
             <h1>Explore our van options</h1>
             <div className='van-list-filter-buttons'>
-                <button onClick={genNewSearchParamString('type', 'simple')}>simple</button>
-                <button onClick={genNewSearchParamString('type', 'luxury')}>luxury</button>
-                <button onClick={genNewSearchParamString('type', 'rugged')}>rugged</button>
-                <button onClick={genNewSearchParamString('type', null)}>Clear</button>
-                <Link
-                    to={genNewSearchParamString('type', 'simple')}
-                    className='van-type simple'
-                >Simple</Link>
-                <Link
-                    to={genNewSearchParamString('type', 'rugged')}
-                    className='van-type rugged'
-                >rugged</Link>
-                <Link
-                    to={genNewSearchParamString('type', 'luxury')}
-                    className='van-type luxury'>
-                    luxury</Link>
-                <Link
-                    to={genNewSearchParamString('type', null)}
+                <button
+                    onClick={() => handleFilterChange('type', 'simple')}
+                    className={`van-type simple ${typeFilter === 'simple' ? 'selected' : ''}`}
+                >simple</button>
+                <button
+                    onClick={() => handleFilterChange('type', 'luxury')}
+                    className={`van-type luxury ${typeFilter === 'luxury' ? 'selected' : ''}`}
+                >luxury</button>
+                <button
+                    onClick={() => handleFilterChange('type', 'rugged')}
+                    className={`van-type rugged ${typeFilter === 'rugged' ? 'selected' : ''}`}
+                >rugged</button>
+                {typeFilter ? (<button
+                    onClick={() => handleFilterChange('type', null)}
                     className='van-type clear-filters'
-                >Clear</Link>
+                >Clear</button>
+                ) : null}
             </div>
             <div className="van-list">
                 {vanElements}
