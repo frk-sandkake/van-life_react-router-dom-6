@@ -13,6 +13,11 @@ import Dashboard from './pages/host/Dashboard'
 import Income from './pages/host/Income'
 import Reviews from './pages/host/Reviews'
 import LayoutHost from './components/LayoutHost'
+import VansHost from './pages/host/VansHost'
+import VanDetailsHost from './pages/host/VanDetailsHost'
+import VanInfoHost from './pages/host/VanInfoHost'
+import VanPricingHost from './pages/host/VanPricingHost'
+import VanPhotosHost from './pages/host/VanPhotosHost'
 
 function App() {
   return (
@@ -20,14 +25,20 @@ function App() {
       <Routes>
         <Route path='/' element={<LayoutMain />}>
           <Route index element={<Home />}/>
-          <Route path='/about' element={<About />}/>
-          <Route path='/vans' element={<Vans />}/>
-          <Route path='/vans/:id' element={<VanDetails />}/>
+          <Route path='about' element={<About />}/>
+          <Route path='vans' element={<Vans />}/>
+          <Route path='vans/:id' element={<VanDetails />}/>
 
           <Route path='host' element={<LayoutHost />}>
             <Route index element={<Dashboard />}/>
-            <Route path='/host/income' element={<Income />}/>
-            <Route path='/host/reviews' element={<Reviews />}/>
+            <Route path='host/income' element={<Income />}/>
+            <Route path='host/reviews' element={<Reviews />}/>
+            <Route path='host/vans' element={<VansHost />}/>
+            <Route path='vans/:id' element={<VanDetailsHost />}>
+              <Route index element={<VanInfoHost />}/>
+              <Route path='pricing' element={<VanPricingHost />}/>
+              <Route path='photos' element={<VanPhotosHost />}/>
+            </Route>
           </Route>
 
         </Route>
