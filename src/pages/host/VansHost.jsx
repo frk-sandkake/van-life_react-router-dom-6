@@ -1,7 +1,7 @@
 import React from "react"
 import { Link } from "react-router-dom"
 
-export default function HostVans() {
+export default function VansHost() {
     const [vans, setVans] = React.useState([])
 
     React.useEffect(() => {
@@ -37,8 +37,8 @@ export default function HostVans() {
                         </section>
 
                     ) : (
-                            <h2>Loading...</h2>
-                        )
+                        <h2>Loading...</h2>
+                    )
                 }
             </div>
         </section>
